@@ -61,13 +61,20 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<!-- ~~~~~~~ junit ~~~~~~~ -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- ~~~~~~~ sask commons ~~~~~~~ -->
+		<dependency>
+			<groupId>com.github.dice-group</groupId>
+			<artifactId>sask-commons</artifactId>
+			<version>0.0.7.5</version>
+		</dependency>
+
 		<!-- spring boot dev tools to improve development-time experience  -->
 		<dependency>
     			<groupId>org.springframework.boot</groupId>
@@ -75,7 +82,6 @@
     			<version>${spring.boot.devtools}</version>
     			<optional>true</optional>
   		</dependency>
-		
 	</dependencies>
 
 	<build>
@@ -113,4 +119,11 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 </project>

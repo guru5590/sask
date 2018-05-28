@@ -91,9 +91,7 @@ public class RiveScriptOutputAnalyzer  {
 			log.error("resourceLoader, IO Exception while parsing YAML template,Stack Trace=" + e.getMessage());
 			e.printStackTrace();
 		}
-
-    }
-
+	}
 
 	public ResponseList riveHandler(String query) {
 
@@ -113,7 +111,7 @@ public class RiveScriptOutputAnalyzer  {
 	// Custom Function to check if Query is found in Rive Script.
 	public static boolean isQueryFound(String query) {
 		String reply = bot.reply("user", query);
-		log.info(reply);
+
 		if ("NOT FOUND".equals(reply)) {
 			return false;
 		}
@@ -142,12 +140,10 @@ public class RiveScriptOutputAnalyzer  {
 		} else {
 			responseHandleText = responseFromRive(textMessage);
 			// Response will be of the form {"comment":"Great! You?"}
-
 			log.debug("Response message from Rive = " + textMessage);
 			responselist.setMessageType(MessageType.PLAIN_TEXT);
 			responselist.addMessage(createPlainTextResponse(textMessage));
 		}
-
 		return responselist;
 	}
 
@@ -166,7 +162,6 @@ public class RiveScriptOutputAnalyzer  {
 
 		String responseForTemplate = null;
 		if (!templateValue.equalsIgnoreCase("help")) {
-
 			responseForTemplate = convertYamlToJsonString(yamlTemplateContents);
 		}
 		return responseForTemplate;
@@ -175,8 +170,12 @@ public class RiveScriptOutputAnalyzer  {
 	private static boolean isJSONValid(String jsonInString) {
 		Gson gson = new Gson();
 		try {
-			gson.fromJson(jsonInString, Object.class);
-			return true;
+			if(jsonInString.length() > 0 && jsonInString.split("\\s+").length==1) {
+				return false;
+			} else{
+				gson.fromJson(jsonInString, Object.class);
+				return true;
+			}
 		} catch (com.google.gson.JsonSyntaxException ex) {
 			return false;
 		}
