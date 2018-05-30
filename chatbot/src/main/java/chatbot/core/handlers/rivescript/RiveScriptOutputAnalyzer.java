@@ -52,7 +52,7 @@ public class RiveScriptOutputAnalyzer  {
     private void resourceLoader() {
         
         
-    		log.info("Loading the Rive Script Files");
+    		log.debug("Loading the Rive Script Files");
         try {
         		ClassLoader cl = this.getClass().getClassLoader(); 
         		bot = new RiveScript(); 
@@ -83,7 +83,7 @@ public class RiveScriptOutputAnalyzer  {
 			e.printStackTrace();
         }
         
-        log.info("Loading the Template file containing the pre-defined questions");
+        log.debug("Loading the Template file containing the pre-defined questions");
 		try {
 			InputStream templateFileStream = resourceLoader.getResource("classpath:rivescript/properties/template.yml").getInputStream();
 			yamlTemplateContents = new BufferedReader(new InputStreamReader(templateFileStream)).lines().collect(Collectors.joining("\n"));
@@ -109,9 +109,9 @@ public class RiveScriptOutputAnalyzer  {
 	}
 
 	// Custom Function to check if Query is found in Rive Script.
-	public static boolean isQueryFound(String query) {
+	public boolean isQueryFound(String query) {
+		resourceLoader();
 		String reply = bot.reply("user", query);
-
 		if ("NOT FOUND".equals(reply)) {
 			return false;
 		}

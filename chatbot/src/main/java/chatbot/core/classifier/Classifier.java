@@ -60,7 +60,8 @@ public class Classifier {
 			RiveScriptQueryHandler basicText = new RiveScriptQueryHandler();
 			// isQueryFound method is now moved to RiveScriptOutputAnalyzer class
 			// TODO: Do we need two classes for Rivescripts or can we merge of of them
-			boolean flag = RiveScriptOutputAnalyzer.isQueryFound(query);
+			RiveScriptOutputAnalyzer analyzer = new RiveScriptOutputAnalyzer();
+			boolean flag = analyzer.isQueryFound(query);
 			log.debug("query is :: "+ query);
 			if (flag) {
 				log.info("basicText execution");
