@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/chat")
-public class Application {
+public class ChatbotController {
 
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
