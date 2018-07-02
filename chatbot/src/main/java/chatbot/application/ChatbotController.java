@@ -2,6 +2,7 @@ package chatbot.application;
 
 import chatbot.core.classifier.IntentLearner;
 import chatbot.core.handlers.Handler;
+import chatbot.io.incomingrequest.FeedbackRequest;
 import chatbot.io.incomingrequest.IncomingRequest;
 import chatbot.io.response.ResponseList;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatbotController {
 
 	
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/chat", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody ResponseList route(@RequestBody final IncomingRequest request) throws Exception {
 		try {
 
@@ -43,6 +44,18 @@ public class ChatbotController {
 			ResponseList responselist = new ResponseList();
 			responselist.setError();
 			return responselist;
+		}
+		
+	}
+	@RequestMapping(value = "/feedback", method = RequestMethod.POST, produces = "application/json")
+	public void feedback(@RequestBody final FeedbackRequest feedbackRequest) throws Exception {
+		try {
+			IntentLearner intentLearner = new IntentLearner();
+			intentLearner.processFeedback(feedbackRequest);
+			
+		}
+		catch (Exception e) {
+			
 		}
 		
 	}
